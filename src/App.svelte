@@ -7,6 +7,7 @@
     current_color,
   } from "./stores";
   import ModeCreateEditAndSelect from "./lib/ModeCreateEditAndSelect.svelte";
+  import AnimationGrid from "./lib/AnimationGrid.svelte";
 
   onMount(() => {
     func_analyze_audio();
@@ -16,6 +17,7 @@
 </script>
 
 <main>
+  <AnimationGrid />
   <ModeCreateEditAndSelect />
   <div class="indicator" style="--color: {$current_color}"></div>
   <div class="noise-level">Noise Level: {$current_volume}</div>

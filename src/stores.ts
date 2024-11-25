@@ -116,13 +116,13 @@ export const func_analyze_audio = async () => {
             analyser.getByteFrequencyData(data_array);
 
             // Log the raw data array for debugging
-            console.log("Audio Data Array:", data_array);
+            // console.log("Audio Data Array:", data_array);
 
             // Calculate average noise level
             const avg_current_volume = data_array.reduce((sum, value) => sum + value, 0) / data_array.length;
             current_volume.set(parseFloat(avg_current_volume.toFixed(2))); // Update the reactive noise level
 
-            console.log(`Noise Level: ${current_volume}`);
+            // console.log(`Noise Level: ${current_volume}`);
         }, 100); // Update every 100ms
     } catch (error) {
         console.error("Error accessing microphone:", error);
@@ -134,4 +134,19 @@ export const func_stop_analyzing = () => {
     if (interval_id) clearInterval(interval_id);
     console.log("Stopped audio analysis.");
 };
+// ------------------------------------------------------------------------------
+
+// Animation Stuff --------------------------------------------------------------
+export let goal = writable(20);
+export let current_count = writable(0);
+
+setInterval(() => {
+    let value = get(current_volume);
+    let mode: ModeObject = get(current_mode);
+    if (value > mode.volume_limit) {
+        current_count.update(n => n + 1);
+        console.log("Current Count:", get(current_count));
+    }
+}, 1000);
+
 // ------------------------------------------------------------------------------
