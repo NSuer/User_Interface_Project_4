@@ -1,30 +1,39 @@
 <script lang="ts">
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
-  import VoiceLevel from './lib/VoiceLevel.svelte';
+  import { onMount } from "svelte";
+  import {
+    func_analyze_audio,
+    func_stop_analyzing,
+    current_volume,
+    current_color,
+  } from "./stores";
+  import ModeCreateEditAndSelect from "./lib/ModeCreateEditAndSelect.svelte";
+
+  onMount(() => {
+    func_analyze_audio();
+
+    return () => func_stop_analyzing();
+  });
 </script>
 
 <main>
-  <VoiceLevel />
-
-
+  <ModeCreateEditAndSelect />
+  <div class="indicator" style="--color: {$current_color}"></div>
+  <div class="noise-level">Noise Level: {$current_volume}</div>
 </main>
 
 <style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
+  .indicator {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 20px auto;
+    background-color: var(--color, green);
+    transition: background-color 0.3s ease;
   }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
+
+  .noise-level {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 10px;
   }
 </style>
