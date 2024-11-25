@@ -30,7 +30,7 @@
   
           // Calculate average noise level
           const avgNoiseLevel = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
-          noiseLevel = avgNoiseLevel.toFixed(2); // Update the reactive noise level
+          noiseLevel = parseFloat(avgNoiseLevel.toFixed(2)); // Update the reactive noise level
   
           // Change color based on noise level
           color = avgNoiseLevel > 50 ? "red" : "green";
