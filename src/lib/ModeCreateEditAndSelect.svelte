@@ -10,10 +10,13 @@
 
 <main>
     <!-- A Scrollable list of Modes, where you can edit, delete, and add new modes -->
-    <!-- Each Mode will have it's Name and Volume Limit -->
+    <!-- Each Mode will have its Name and Volume Limit -->
     <div class="Mode_List">
         {#each $mode_list as mode (mode.id)}
-            <div class="mode-item">
+            <div
+                class="mode-item"
+                class:selected={mode.id === $current_mode.id}
+            >
                 <input
                     type="text"
                     bind:value={mode.name}
@@ -34,6 +37,8 @@
         {/each}
     </div>
 
+    
+
     <div class="add-mode">
         <button on:click={() => func_update_mode_list(-1)}>Add New Mode</button>
     </div>
@@ -47,9 +52,13 @@
         padding: 10px;
         border-bottom: 1px solid #ccc;
     }
+    .mode-item.selected {
+        background-color: lightblue;
+        outline: 2px solid blue;
+        font-weight: bold;
+    }
     .Mode_List {
         padding: 20px;
-        background-color: white;
         max-height: 80vh;
         overflow-y: auto;
     }
