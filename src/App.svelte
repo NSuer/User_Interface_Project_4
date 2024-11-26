@@ -7,7 +7,8 @@
     current_color,
   } from "./stores";
   import ModeCreateEditAndSelect from "./lib/ModeCreateEditAndSelect.svelte";
-  import AnimationGrid from "./lib/AnimationGrid.svelte";
+  import Bucket from "./lib/Bucket.svelte";
+  import Egg from "./lib/Egg.svelte";
 
   onMount(() => {
     func_analyze_audio();
@@ -17,7 +18,8 @@
 </script>
 
 <main>
-  <AnimationGrid />
+  <Egg />
+  <Bucket />
   <ModeCreateEditAndSelect />
   <div class="indicator" style="--color: {$current_color}"></div>
   <div class="noise-level">Noise Level: {$current_volume}</div>
