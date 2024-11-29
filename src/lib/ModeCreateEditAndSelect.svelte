@@ -45,6 +45,13 @@
 </main>
 
 <style>
+    button {
+        padding: 5px 10px;
+        border: none;
+        background-color: lightblue;
+        cursor: pointer;
+        color: black;
+    }
     .mode-item {
         display: flex;
         justify-content: space-between;

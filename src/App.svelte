@@ -18,26 +18,43 @@
 </script>
 
 <main>
-  <Egg />
+  <div class="decibelContainer">
+    <div class="noise-level">Noise Level: {$current_volume}</div>
+    <div
+      class="indicator"
+      style="background-color: {$current_color}; margin-left: 10px;"
+    ></div>
+  </div>
   <Bucket />
   <ModeCreateEditAndSelect />
-  <div class="indicator" style="--color: {$current_color}"></div>
-  <div class="noise-level">Noise Level: {$current_volume}</div>
 </main>
 
 <style>
+  .decibelContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    justify-content: center;
+  }
   .indicator {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin: 20px auto;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
     background-color: var(--color, green);
     transition: background-color 0.3s ease;
+    margin-left: 10px;
   }
 
   .noise-level {
     text-align: center;
     font-size: 1.2rem;
-    margin-top: 10px;
+    margin-top: 0px;
+    color: black;
+  }
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: lightgray;
   }
 </style>
