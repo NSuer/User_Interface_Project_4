@@ -48,9 +48,7 @@
     button {
         padding: 5px 10px;
         border: none;
-        background-color: lightblue;
         cursor: pointer;
-        color: black;
     }
     .mode-item {
         display: flex;
@@ -65,7 +63,6 @@
         font-weight: bold;
     }
     .Mode_List {
-        padding: 20px;
         max-height: 80vh;
         overflow-y: auto;
     }

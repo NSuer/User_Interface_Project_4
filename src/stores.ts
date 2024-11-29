@@ -139,13 +139,28 @@ export const func_stop_analyzing = () => {
 // Animation Stuff --------------------------------------------------------------
 export let goal = writable(20);
 export let current_count = writable(0);
+export let water_level = writable(50); // Initial water level
+export let isPaused = writable(false);
+export let ResetBucket = writable(false);
+export let isBucketFull = writable(false);
+export let resetting = writable(false);
+
+current_count.subscribe(count => {
+    if (count >= get(goal)) {
+        isBucketFull.set(true);
+    } else {
+        isBucketFull.set(false);
+    }
+});
 
 setInterval(() => {
-    let value = get(current_volume);
-    let mode: ModeObject = get(current_mode);
-    if (value > mode.volume_limit) {
-        current_count.update(n => n + 1);
-        console.log("Current Count:", get(current_count));
+    if (!get(isPaused)) {
+        let value = get(current_volume);
+        let mode: ModeObject = get(current_mode);
+        if (value > mode.volume_limit) {
+            current_count.update(n => n + 1);
+            console.log("Current Count:", get(current_count));
+        }
     }
 }, 1000);
 
