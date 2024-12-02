@@ -6,9 +6,9 @@ I used this as a reference for my water. It was heavily referenced for my water 
         goal,
         current_count,
         water_level,
-        ResetBucket,
-        isBucketFull,
-        isPaused,
+        reset_bucket,
+        is_bucket_full,
+        is_paused,
         resetting,
     } from "../stores";
     import { onMount } from "svelte";
@@ -191,8 +191,8 @@ I used this as a reference for my water. It was heavily referenced for my water 
 <div class="container">
     <div class="bucket">
         <canvas bind:this={canvas}></canvas>
-        {#if $isBucketFull === true}
-            <div class="alert">Goal Reached!</div>
+        {#if $is_bucket_full === true}
+            <div class="alert_bad">Limit Reached!</div>
         {/if}
         {#if $resetting === true}
             <div class="alert">Resetting...</div>
@@ -232,6 +232,18 @@ I used this as a reference for my water. It was heavily referenced for my water 
         transform: translate(-50%, -50%);
         padding: 20px;
         background-color: #28d9e2;
+        color: white;
+        font-size: 24px;
+        border-radius: 10px;
+        animation: fadeInOut 2s infinite;
+    }
+    .alert_bad {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: red;
         color: white;
         font-size: 24px;
         border-radius: 10px;

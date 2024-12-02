@@ -1,6 +1,35 @@
 import { writable } from "svelte/store";
-import { readable } from 'svelte/store';
 import { get } from 'svelte/store';
+
+// Animation Stuff --------------------------------------------------------------
+export let goal = writable(1000000);
+export let current_count = writable(0);
+export let water_level = writable(50); // Initial water level
+export let is_paused = writable(false);
+export let reset_bucket = writable(false);
+export let is_bucket_full = writable(false);
+export let resetting = writable(false);
+
+current_count.subscribe(count => {
+    if (count >= get(goal)) {
+        is_bucket_full.set(true);
+    } else {
+        is_bucket_full.set(false);
+    }
+});
+
+setInterval(() => {
+    if (!get(is_paused)) {
+        let value = get(current_volume);
+        let mode: ModeObject = get(current_mode);
+        if (value > mode.volume_limit) {
+            current_count.update(n => n + 1);
+            console.log("Current Count:", get(current_count));
+        }
+    }
+}, 1000);
+
+// ------------------------------------------------------------------------------
 
 // Mode Stuff -------------------------------------------------------------------
 
@@ -8,24 +37,26 @@ export class ModeObject {
     id: number;
     name: string;
     volume_limit: number;
+    count_threshold: number;
 
-
-    constructor(id: number, name: string, volume_limit: number) {
+    constructor(id: number, name: string, volume_limit: number, count_threshold: number) {
         this.id = id;
         this.name = name;
         this.volume_limit = volume_limit;
+        this.count_threshold = count_threshold;
     }
 }
 
 export let mode_list = writable([
-    new ModeObject(0, "Silent", 10),
-    new ModeObject(1, "Quiet", 20),
-    new ModeObject(2, "Normal", 30)
+    new ModeObject(0, "Silent", 10, 20),
+    new ModeObject(1, "Quiet", 20, 15),
+    new ModeObject(2, "Normal", 30, 25)
 ]);
 
 export let current_mode = writable<ModeObject>(get(mode_list)[0]);
+func_set_current_mode(0);
 
-export function func_update_mode_list(mode_id: number, name?: string, volume_limit?: number) {
+export function func_update_mode_list(mode_id: number, name?: string, volume_limit?: number, count_threshold?: number) {
     // If the mode already exists, update it
     let mode_list_array = get(mode_list);
     let mode_exists = false;
@@ -44,9 +75,12 @@ export function func_update_mode_list(mode_id: number, name?: string, volume_lim
         if (volume_limit !== undefined) {
             mode_list_array[mode_index].volume_limit = volume_limit;
         }
+        if (count_threshold !== undefined) {
+            mode_list_array[mode_index].count_threshold = count_threshold;
+        }
     } else {
         // If the mode doesn't exist, add it
-        mode_list_array.push(new ModeObject(mode_list_array.length, name || "Default", volume_limit || 0));
+        mode_list_array.push(new ModeObject(mode_list_array.length, name || "Default", volume_limit || 0, count_threshold || 0));
     }
     mode_list.set(mode_list_array);
 }
@@ -57,6 +91,7 @@ export function func_set_current_mode(mode_id) {
     for (i = 0; i < mode_list_array.length; i++) {
         if (mode_list_array[i].id == mode_id) {
             current_mode.set(mode_list_array[i]);
+            goal.set(mode_list_array[i].count_threshold);
         }
     }
 }
@@ -77,7 +112,6 @@ export function func_delete_mode(mode_id) {
     }
 }
 // ------------------------------------------------------------------------------
-
 
 // Microphone Stuff -------------------------------------------------------------
 export let current_volume = writable(0.00);
@@ -134,34 +168,4 @@ export const func_stop_analyzing = () => {
     if (interval_id) clearInterval(interval_id);
     console.log("Stopped audio analysis.");
 };
-// ------------------------------------------------------------------------------
-
-// Animation Stuff --------------------------------------------------------------
-export let goal = writable(20);
-export let current_count = writable(0);
-export let water_level = writable(50); // Initial water level
-export let isPaused = writable(false);
-export let ResetBucket = writable(false);
-export let isBucketFull = writable(false);
-export let resetting = writable(false);
-
-current_count.subscribe(count => {
-    if (count >= get(goal)) {
-        isBucketFull.set(true);
-    } else {
-        isBucketFull.set(false);
-    }
-});
-
-setInterval(() => {
-    if (!get(isPaused)) {
-        let value = get(current_volume);
-        let mode: ModeObject = get(current_mode);
-        if (value > mode.volume_limit) {
-            current_count.update(n => n + 1);
-            console.log("Current Count:", get(current_count));
-        }
-    }
-}, 1000);
-
 // ------------------------------------------------------------------------------
