@@ -40,13 +40,17 @@ The interface consists of two primary components: Real-time Noise Monitoring and
     - ![NoiseLevel](DocPics/NoiseLevel.png)
   - Bucket Animation:
     - The bucket fills with drops each time the noise level exceeds the limit. This visually represents the accumulation of noise over time. The goal counter below tracks progress toward the limit.
+    - ![Bucket](DocPics/Bucket.png)
   - Status and Control Buttons:
     - Start, Pause, Reset: These buttons control the monitoring process.
       - Start: Begins noise tracking and drop accumulation.
       - Pause: Halts the monitoring without resetting the progress.
       - Reset: Clears the bucket and restarts the monitoring process.
+    - ![StatusControl](DocPics/StatusControl.png)
   - Progress Display:
     - A count tracker shows how many drops have fallen into the bucket and how many are needed to reach the set goal (e.g., "Count: 12 Goal: 20").
+    - ![CountGoal](DocPics/CountGoal.png)
+![Realtime](DocPics/Realtime.png)
 
 - Mode Management Interface:
   - Teachers can fine-tune the system to suit different classroom activities. For example:
@@ -62,6 +66,7 @@ The interface consists of two primary components: Real-time Noise Monitoring and
     - Delete Button: Removes a mode from the list (excluding default modes).
   - Add New Mode:
     - Teachers can create custom modes by specifying a name, volume limit, and count threshold, then saving it for future use.
+![Mode](DocPics/Mode.png)
 
 ### Implementation:
 
