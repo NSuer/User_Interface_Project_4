@@ -98,7 +98,7 @@ Overall, the combination of Svelte's reactivity and the water simulation provide
 - Different feedback visualizations: Visuals other than the bucket, for example an egg breaking.
 
 ## Demo Video
-https://youtu.be/L80COjKEjEc
+https://youtu.be/dU1wUNW0OSg
 
 ## Credit to author of code I referenced / Copied 
 - 2D water simulation by Christopher Yann Moussaba 
