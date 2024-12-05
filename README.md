@@ -37,7 +37,7 @@ The interface consists of two primary components: Real-time Noise Monitoring and
   - The visual bucket and alert system provide immediate feedback to students, encouraging self-regulation. The interactive nature of the drops falling into a bucket makes noise management engaging and intuitive.
   - Noise Level Display:
     - Located at the top of the interface, this displays the current noise level in decibels. A dynamic indicator (red light) shows whether the current noise exceeds the set threshold.
-![DocPics/NoiseLevel,png]
+    - ![NoiseLevel](DocPics/NoiseLevel.png)
   - Bucket Animation:
     - The bucket fills with drops each time the noise level exceeds the limit. This visually represents the accumulation of noise over time. The goal counter below tracks progress toward the limit.
   - Status and Control Buttons:
