@@ -50,6 +50,7 @@ The interface consists of two primary components: Real-time Noise Monitoring and
   - Progress Display:
     - A count tracker shows how many drops have fallen into the bucket and how many are needed to reach the set goal (e.g., "Count: 12 Goal: 20").
     - ![CountGoal](DocPics/CountGoal.png)
+
 ![Realtime](DocPics/Realtime.png)
 
 - Mode Management Interface:
@@ -66,6 +67,7 @@ The interface consists of two primary components: Real-time Noise Monitoring and
     - Delete Button: Removes a mode from the list (excluding default modes).
   - Add New Mode:
     - Teachers can create custom modes by specifying a name, volume limit, and count threshold, then saving it for future use.
+
 ![Mode](DocPics/Mode.png)
 
 ### Implementation:
