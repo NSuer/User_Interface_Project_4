@@ -1,6 +1,12 @@
 # User_Interface_Project_4
 This webiste only works on google chrome right now. I have tested on firefox and it doesn't work. 
 
+## Link to Source Code 
+https://github.com/NSuer/User_Interface_Project_4
+
+## Link to Hosted Website
+https://nsuer.github.io/User_Interface_Project_4/
+
 ## Documentation
 
 ### Description of the Problem: Classroom Noise Management and Focus  
